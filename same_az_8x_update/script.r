@@ -1,10 +1,10 @@
 #!/usr/local/bin/Rscript
 status <- NULL # or e.g. "[DRAFT]"
-config <- "Amazon Aurora (r3.4xlarge)\nsysbench 0.5, 100 x 20M rows (2B rows total), 30 minutes per step"
+config <- "Amazon Aurora (r3.8xlarge)\nsysbench 0.5, 100 x 20M rows (2B rows total), 30 minutes per step"
 steps <- c(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024)
 time_per_step <- 1800
-output_path <- "~/src/demos/aurora_benchmark/same_az_4x/"
-test_name <- "01_baseline"
+output_path <- "~/src/demos/aurora_benchmark/same_az_8x_update/"
+test_name <- "aurora-8xl_"
 
 
 results <- data.frame(
@@ -13,7 +13,7 @@ results <- data.frame(
     "amazon_rds_aurora"
   ),
   file = c(
-    "~/src/demos/aurora_benchmark/same_az_4x/01_baseline_all.csv"
+    "~/src/demos/aurora_benchmark/same_az_8x_update/aurora-8xl_all.csv"
   ),
   name = c(
     "Amazon Aurora"
@@ -30,7 +30,7 @@ results$data <- lapply(results$file, read.csv, header=FALSE, sep=",", col.names=
 # TPS
 pdf(paste(output_path, test_name, "_tps.pdf", sep=""), width=12, height=8)
 plot(0, 0,
-  pch=".", col="white", xaxt="n", ylim=c(0,2000), xlim=c(0,length(steps)),
+  pch=".", col="white", xaxt="n", ylim=c(0,8000), xlim=c(0,length(steps)),
   main=paste(status, "Transaction Rate by Concurrent Sysbench Threads", status, "\n\n"),
   xlab="Concurrent Sysbench Threads",
   ylab="Transaction Rate (tps)"
@@ -66,7 +66,7 @@ dev.off()
 # TPS per Thread
 pdf(paste(output_path, test_name, "_tps_per_thread.pdf", sep=""), width=12, height=8)
 plot(0, 0,
-  pch=".", col="white", xaxt="n", ylim=c(0,60), xlim=c(0,length(steps)),
+  pch=".", col="white", xaxt="n", ylim=c(0,100), xlim=c(0,length(steps)),
   main=paste(status, "Transaction Rate per Thread by Concurrent Sysbench Threads", status, "\n\n"),
   xlab="Concurrent Sysbench Threads",
   ylab="Transactions per thread (tps/thread)"

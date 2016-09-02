@@ -1,6 +1,6 @@
 #!/usr/local/bin/Rscript
 status <- NULL # or e.g. "[DRAFT]"
-config <- "Amazon RDS (MySQL Multi-AZ, Aurora 1.7; r3.4xlarge) vs. Google Cloud SQL Second Generation\nsysbench 0.5, 100 x 20M rows (2B rows total), 30 minutes per step"
+config <- "Amazon Aurora (r3.4xlarge)\nsysbench 0.5, 100 x 20M rows (2B rows total), 30 minutes per step"
 steps <- c(1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024)
 time_per_step <- 1800
 output_path <- "~/src/demos/aurora_benchmark/same_az_4x_update/"
@@ -16,10 +16,10 @@ results <- data.frame(
     "~/src/demos/aurora_benchmark/same_az_4x_update/01_baseline_all.csv"
   ),
   name = c(
-    "Amazon RDS Aurora"
+    "Amazon Aurora"
   ),
   color = c(
-    "blue"
+    "magenta"
   )
 )
 

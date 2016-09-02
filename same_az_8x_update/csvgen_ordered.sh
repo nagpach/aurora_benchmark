@@ -1,7 +1,7 @@
 #!/bin/sh
  
 test_path=.
-test_name=01_baseline
+test_name=aurora-8xl
  
 echo "\n" > ${test_path}/${test_name}_all.csv
 for threads in 1 2 4 8 16 32 64 128 256 512 1024
